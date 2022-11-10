@@ -1,0 +1,46 @@
+:root {
+  --bg-color: #dadada;
+  --light: #e6e6e6;
+  --dark: #1e1e1e;
+  --gray: grey;
+
+  --box-shadow-color: rgba(0, 0, 0, 0.15);
+
+  --red: indianred;
+  --green: mediumseagreen;
+  --blue: dodgerblue;
+  --orange: coral;
+  --violet: violet;
+}
+
+body {
+  margin: 0;
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto",
+    "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: var(--bg-color);
+  padding: 36px;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+@font-face {
+  font-family: "Inter";
+  font-weight: normal;
+  src: url("/public/fonts/Inter-Regular.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Inter";
+  font-weight: bold;
+  src: url("/public/fonts/Inter-SemiBold.ttf") format("truetype");
+}

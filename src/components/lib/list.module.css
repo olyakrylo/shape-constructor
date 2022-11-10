@@ -1,0 +1,25 @@
+.list {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  gap: 12px;
+}
+
+.list > li {
+  width: 100%;
+}
+
+.item {
+  all: unset;
+  display: flex;
+  align-items: center;
+  padding: 10px 12px;
+  gap: 16px;
+  background: var(--light);
+  box-shadow: 0 4px 8px var(--box-shadow-color);
+  border-radius: 4px;
+  width: 100%;
+}

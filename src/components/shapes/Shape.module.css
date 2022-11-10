@@ -1,0 +1,58 @@
+.container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  cursor: move;
+  display: flex;
+}
+
+.border {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border: 1px dashed var(--gray);
+}
+
+.fill_red {
+  fill: var(--red);
+}
+.fill_green {
+  fill: var(--green);
+}
+.fill_blue {
+  fill: var(--blue);
+}
+.fill_orange {
+  fill: var(--orange);
+}
+.fill_violet {
+  fill: var(--violet);
+}
+.fill_black {
+  fill: var(--dark);
+}
+.fill_none {
+  fill: none;
+}
+
+.stroke_red {
+  stroke: var(--red);
+}
+.stroke_green {
+  stroke: var(--green);
+}
+.stroke_blue {
+  stroke: var(--blue);
+}
+.stroke_orange {
+  stroke: var(--orange);
+}
+.stroke_violet {
+  stroke: var(--violet);
+}
+.stroke_black {
+  stroke: var(--dark);
+}
+.stroke_none {
+  stroke: none;
+}

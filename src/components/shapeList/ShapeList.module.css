@@ -1,0 +1,17 @@
+.container {
+}
+
+.item {
+  cursor: pointer;
+  transition: filter 0.2s ease-in-out;
+}
+.item:hover {
+  filter: brightness(0.95);
+}
+
+.item__icon {
+  display: inline-block;
+  width: 24px;
+  max-height: 24px;
+  stroke: var(--dark);
+}

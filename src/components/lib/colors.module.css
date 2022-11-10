@@ -1,0 +1,53 @@
+.container {
+  display: flex;
+  gap: 8px;
+}
+
+.item {
+  all: unset;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+.item:hover {
+  filter: brightness(0.95);
+}
+
+.item::after {
+  border: solid var(--light);
+  position: absolute;
+  transform: rotate(-45deg);
+  border-width: 0 0 2px 2px !important;
+  height: 3px;
+  width: 6px;
+  margin: -3px 6px;
+}
+.item.none::after {
+  border: solid var(--dark);
+}
+.item[aria-selected="true"]::after {
+  content: "";
+}
+
+.item.none {
+  box-shadow: inset 0 0 0 1px var(--dark);
+}
+.item.black {
+  background-color: var(--dark);
+}
+.item.red {
+  background-color: var(--red);
+}
+.item.green {
+  background-color: var(--green);
+}
+.item.blue {
+  background-color: var(--blue);
+}
+.item.orange {
+  background-color: var(--orange);
+}
+.item.violet {
+  background-color: var(--violet);
+}

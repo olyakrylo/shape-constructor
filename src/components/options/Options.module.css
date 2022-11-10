@@ -1,0 +1,56 @@
+.container {
+}
+
+.option {
+  justify-content: space-between;
+}
+
+.option_remove {
+  border: 1px solid var(--red);
+  cursor: pointer;
+  transition: background-color 0.1s ease-in-out, color 0.1s ease-in-out;
+}
+
+.option_remove:hover {
+  background-color: var(--red);
+  color: var(--light);
+}
+
+.size {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.size__button {
+  all: unset;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border-radius: 50%;
+}
+.size__button.higher {
+  transform: rotate(180deg);
+}
+.size__button:hover {
+  opacity: 0.5;
+}
+
+.button__icon {
+  stroke: var(--dark);
+}
+
+.size__input {
+  all: unset;
+  width: 30px;
+  text-align: center;
+  font-size: 14px;
+  color: var(--dark);
+}
+
+.size__input:focus {
+  box-shadow: 0 1px 0 0 var(--dark);
+}

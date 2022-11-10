@@ -1,0 +1,8 @@
+.canvas {
+  width: 650px;
+  height: 650px;
+  background: var(--light);
+  box-shadow: 0 5px 10px var(--box-shadow-color);
+  border-radius: 4px;
+  position: relative;
+}
