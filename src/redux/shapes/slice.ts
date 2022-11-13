@@ -7,11 +7,13 @@ import { ColorShapeProp, ValueShapeProp } from "../../entities/options";
 export interface ShapeState {
   shapes: Record<string, ShapeI>;
   selected: string | null;
+  dragging: boolean;
 }
 
 const initialState: ShapeState = {
   shapes: {},
   selected: null,
+  dragging: false,
 };
 
 export const shapesSlice = createSlice({
@@ -36,9 +38,9 @@ export const shapesSlice = createSlice({
         type: action.payload.type,
         height,
         width: 100,
-        top: 0,
-        left: 0,
-        rotate: 0,
+        top: 20,
+        left: 20,
+        rotation: 0,
         fill: Color.none,
         stroke: Color.black,
         strokeWidth: 1,
@@ -71,7 +73,32 @@ export const shapesSlice = createSlice({
       action: PayloadAction<{ id: string; prop: ValueShapeProp; value: number }>
     ) => {
       const { id, prop, value } = action.payload;
+      if (state.shapes[id].locked) {
+        const lastWidth = state.shapes[id].width;
+        const lastHeight = state.shapes[id].height;
+        const rel = lastWidth / lastHeight;
+        if (prop === "width") {
+          state.shapes[id].height = Math.round((value / rel) * 100) / 100;
+        } else if (prop === "height") {
+          state.shapes[id].width = Math.round(value * rel * 100) / 100;
+        }
+      }
       state.shapes[id][prop] = value;
+    },
+    setShapeCoords: (
+      state,
+      action: PayloadAction<{ id: string; top: number; left: number }>
+    ) => {
+      const { id, top, left } = action.payload;
+      state.shapes[id].top = top;
+      state.shapes[id].left = left;
+    },
+    setDragging: (state, action: PayloadAction<boolean>) => {
+      state.dragging = action.payload;
+    },
+    toggleLock: (state, action: PayloadAction<{ id: string }>) => {
+      const { id } = action.payload;
+      state.shapes[id].locked = !state.shapes[id].locked;
     },
   },
 });
@@ -82,6 +109,9 @@ export const {
   selectShape,
   setShapeColor,
   setShapeValue,
+  setShapeCoords,
+  setDragging,
+  toggleLock,
 } = shapesSlice.actions;
 
 export const getShapes = (state: RootState) => state.shapes.shapes;
@@ -91,5 +121,6 @@ export const getSelectedShape = (state: RootState) => {
   if (!selectedId) return null;
   return state.shapes.shapes[selectedId];
 };
+export const isShapeDragging = (state: RootState) => state.shapes.dragging;
 
 export default shapesSlice.reducer;

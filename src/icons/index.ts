@@ -4,6 +4,8 @@ import { ReactComponent as LineIcon } from "./line-icon.svg";
 import { ReactComponent as ArrowIcon } from "./arrow-icon.svg";
 import { ReactComponent as ArrowDownIcon } from "./arrow-down.svg";
 import { ReactComponent as PolygonArrowDown } from "./polygon-arrow-down.svg";
+import { ReactComponent as LockClosedIcon } from "./lock-closed-icon.svg";
+import { ReactComponent as LockOpenIcon } from "./lock-open-icon.svg";
 
 export {
   RectIcon,
@@ -12,4 +14,6 @@ export {
   ArrowIcon,
   ArrowDownIcon,
   PolygonArrowDown,
+  LockClosedIcon,
+  LockOpenIcon,
 };

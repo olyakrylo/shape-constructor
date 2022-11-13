@@ -15,7 +15,7 @@ export const RectangleShape = ({
       width={shape.width + 20}
       height={shape.height + 20}
       className={cx(shapeStyles[fillCN], shapeStyles[strokeCN])}
-      style={{ transform: `rotate(${shape.rotate}deg)` }}
+      style={{ transform: `rotate(${shape.rotation}deg)` }}
     >
       <rect
         x={10}

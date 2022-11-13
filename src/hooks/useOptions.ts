@@ -1,5 +1,5 @@
 import { ColorShapeProp, ValueShapeProp } from "../entities/options";
-import { Color } from "../entities/shape";
+import { Color, MAX_VALUE, MIN_VALUE } from "../entities/shape";
 import {
   getShapes,
   removeShape,
@@ -28,11 +28,15 @@ export const useOptions = () => {
     prop: ValueShapeProp,
     value: string
   ) => {
-    const numValue = parseInt(value, 10);
+    const numValue = Math.round(parseFloat(value) * 100) / 100;
     if (!Object.is(numValue, NaN)) {
-      dispatch(setShapeValue({ id, prop, value: numValue }));
+      const value = Math.max(
+        Math.min(MAX_VALUE(prop), numValue),
+        MIN_VALUE(prop)
+      );
+      dispatch(setShapeValue({ id, prop, value }));
     } else {
-      dispatch(setShapeValue({ id, prop, value: 0 }));
+      dispatch(setShapeValue({ id, prop, value: MIN_VALUE(prop) }));
     }
   };
 
@@ -43,9 +47,17 @@ export const useOptions = () => {
   ) => {
     let oldValue = shapes[id][prop];
     if (event.key === "ArrowUp") {
-      dispatch(setShapeValue({ id, prop, value: oldValue + 1 }));
+      dispatch(
+        setShapeValue({ id, prop, value: getNewValue(prop, oldValue, "add") })
+      );
     } else if (event.key === "ArrowDown") {
-      dispatch(setShapeValue({ id, prop, value: oldValue - 1 }));
+      dispatch(
+        setShapeValue({
+          id,
+          prop,
+          value: getNewValue(prop, oldValue, "subtract"),
+        })
+      );
     }
   };
 
@@ -55,14 +67,24 @@ export const useOptions = () => {
     operator: "add" | "subtract"
   ) => {
     const oldValue = shapes[id][prop];
+    const newValue = getNewValue(prop, oldValue, operator);
+    dispatch(setShapeValue({ id, prop, value: newValue }));
+  };
+
+  const getNewValue = (
+    prop: ValueShapeProp,
+    oldValue: number,
+    operator: "add" | "subtract"
+  ): number => {
+    let newValue;
     switch (operator) {
       case "add":
-        dispatch(setShapeValue({ id, prop, value: oldValue + 1 }));
-        break;
+        newValue = oldValue + 1;
+        return Math.min(MAX_VALUE(prop), newValue);
 
       case "subtract":
-        dispatch(setShapeValue({ id, prop, value: oldValue - 1 }));
-        break;
+        newValue = oldValue - 1;
+        return Math.max(MIN_VALUE(prop), newValue);
     }
   };
 

@@ -3,6 +3,7 @@
 
 .option {
   justify-content: space-between;
+  position: relative;
 }
 
 .option_remove {
@@ -14,6 +15,36 @@
 .option_remove:hover {
   background-color: var(--red);
   color: var(--light);
+}
+
+.option__lock {
+  all: unset;
+  position: absolute;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  top: 0;
+  left: calc(50% - 20px);
+  margin-top: -20px;
+  background-color: var(--light);
+  box-shadow: 0 4px 8px var(--box-shadow-color);
+  border-radius: 4px;
+  cursor: pointer;
+  fill: var(--dark);
+  transition-property: fill, background-color, filter;
+  transition-duration: 0.15s;
+  transition-timing-function: ease-in-out;
+}
+
+.option__lock:hover {
+  filter: brightness(0.95);
+}
+
+.option__lock[aria-checked="true"] {
+  background-color: var(--green);
+  fill: var(--light);
 }
 
 .size {
@@ -38,6 +69,10 @@
 .size__button:hover {
   opacity: 0.5;
 }
+.size__button:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
 
 .button__icon {
   stroke: var(--dark);
@@ -45,7 +80,7 @@
 
 .size__input {
   all: unset;
-  width: 30px;
+  width: 50px;
   text-align: center;
   font-size: 14px;
   color: var(--dark);

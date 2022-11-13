@@ -1,4 +1,5 @@
 import { IconName } from "./icon";
+import { ShapeProp, ValueShapeProp } from "./options";
 
 export enum ShapeType {
   rect = "rect",
@@ -23,10 +24,11 @@ export interface CommonShapePropsI {
   height: number;
   top: number;
   left: number;
-  rotate: number;
+  rotation: number;
   fill: Color;
   stroke: Color;
   strokeWidth: number;
+  locked?: boolean;
 }
 
 export interface RectangleShapeI extends CommonShapePropsI {
@@ -73,3 +75,29 @@ export const SHAPE_LIST: {
     icon: "ArrowIcon",
   },
 ];
+
+export const DRAG_DIRS = [
+  "top",
+  "right",
+  "bottom",
+  "left",
+  "top_left",
+  "top_right",
+  "bottom_left",
+  "bottom_right",
+];
+
+export const ROTATION_DIRS = ["tl", "tr", "bl", "br"];
+
+export type DragDir = typeof DRAG_DIRS[number];
+
+export const MIN_VALUE = (prop: ValueShapeProp): number => {
+  if (prop === "strokeWidth") return 0;
+  if (prop === "rotation") return -359;
+  return 1;
+};
+export const MAX_VALUE = (prop: ValueShapeProp): number => {
+  if (prop === "strokeWidth") return 20;
+  if (prop === "rotation") return 359;
+  return 630;
+};

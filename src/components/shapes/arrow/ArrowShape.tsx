@@ -11,7 +11,7 @@ export const ArrowShape = ({ shape, strokeCN }: ArrowShapeProps) => {
       width={shape.width + 20}
       height={shape.height}
       className={cx(shapeStyles[strokeCN])}
-      style={{ transform: `rotate(${shape.rotate}deg)` }}
+      style={{ transform: `rotate(${shape.rotation}deg)` }}
     >
       <g strokeWidth={shape.strokeWidth} strokeLinecap={"round"}>
         <line

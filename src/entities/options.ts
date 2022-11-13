@@ -2,7 +2,7 @@ import { Color, ShapeI, ShapeType } from "./shape";
 
 export type ValueShapeProp = keyof Pick<
   ShapeI,
-  "width" | "height" | "strokeWidth" | "rotate"
+  "width" | "height" | "strokeWidth" | "rotation"
 >;
 
 export type ColorShapeProp = keyof Pick<ShapeI, "fill" | "stroke">;
@@ -51,7 +51,7 @@ export const VALUE_OPTIONS: ValueOptionI[] = [
   },
   {
     name: "Rotation",
-    property: "rotate",
+    property: "rotation",
     on: new Set([
       ShapeType.rect,
       ShapeType.ellipse,
@@ -88,3 +88,7 @@ export const COLORS = [
   Color.black,
   Color.none,
 ];
+
+export const LOCK: Partial<Record<ValueShapeProp, ValueShapeProp>> = {
+  height: "width",
+};

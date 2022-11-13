@@ -1,4 +1,6 @@
 import { useState, MouseEventHandler } from "react";
+import { useAppDispatch } from "../redux/hooks";
+import { setShapeCoords } from "../redux/shapes/slice";
 
 export interface DragDropHandler {
   onMouseDown: MouseEventHandler<HTMLDivElement>;
@@ -18,6 +20,8 @@ export const useShapeDragDrop = (): {
   dragDropHandler: DragDropHandler;
   setContainerOptions: DragDropOptionsSetter;
 } => {
+  const dispatch = useAppDispatch();
+
   const [containerTop, setContainerTop] = useState(0);
   const [containerLeft, setContainerLeft] = useState(0);
   const [containerWidth, setContainerWidth] = useState(0);
@@ -33,6 +37,7 @@ export const useShapeDragDrop = (): {
   const handleMouseDown: DragDropHandler["onMouseDown"] = (event) => {
     const draggable = event.currentTarget;
 
+    const { id } = event.currentTarget;
     const { clientX, clientY } = event;
     const {
       x: draggableX,
@@ -51,9 +56,7 @@ export const useShapeDragDrop = (): {
 
       top = Math.max(0, Math.min(top, containerHeight - draggableHeight));
       left = Math.max(0, Math.min(left, containerWidth - draggableWidth));
-      // draggable.style.transform = `translate(${left}px,${top}px)`;
-      draggable.style.top = `${top}px`;
-      draggable.style.left = `${left}px`;
+      dispatch(setShapeCoords({ id, top, left }));
     };
 
     const handleMouseUp = () => {
