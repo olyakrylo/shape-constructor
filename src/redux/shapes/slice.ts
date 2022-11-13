@@ -18,7 +18,18 @@ const initialState: ShapeState = {
 
 export const shapesSlice = createSlice({
   name: "shapes",
-  initialState,
+  initialState: () => {
+    const stringShapes = localStorage.getItem("shapes") || "[]";
+    const shapeList = JSON.parse(stringShapes) as ShapeI[];
+    const shapes = shapeList.reduce(
+      (res, curr) => ({
+        ...res,
+        [curr.id]: curr,
+      }),
+      {} as Record<string, ShapeI>
+    );
+    return { ...initialState, shapes };
+  },
   reducers: {
     addShape: (state, action: PayloadAction<{ type: ShapeType }>) => {
       const id = uuid();
