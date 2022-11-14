@@ -11,6 +11,14 @@
   --blue: dodgerblue;
   --orange: coral;
   --violet: violet;
+
+  --body-padding: 36px;
+}
+
+:root.dark {
+  --bg-color: #1e1e1e;
+  --light: #343434;
+  --dark: #e6e6e6;
 }
 
 body {
@@ -21,7 +29,10 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-color: var(--bg-color);
-  padding: 36px;
+  padding: var(--body-padding);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
 }
 
 code {

@@ -1,9 +1,10 @@
 .container {
-  display: flex;
-  gap: 30px;
+  display: grid;
+  grid-template-columns: 1fr max-content;
+  grid-gap: 30px;
   width: max-content;
-  max-width: 100%;
-  margin: auto;
+  height: 100%;
+  max-height: 100%;
 }
 
 .instruments {
@@ -12,4 +13,26 @@
   width: 300px;
   max-width: 100%;
   gap: 36px;
+}
+
+.theme {
+  position: fixed;
+  top: calc(var(--body-padding) / 2);
+  right: calc(var(--body-padding) / 2);
+}
+
+.theme__button {
+  width: 40px;
+  height: 40px;
+  padding: 8px;
+  border: none;
+  outline: none;
+  fill: var(--dark);
+  background-color: var(--light);
+  box-shadow: 0 4px 8px var(--box-shadow-color);
+  border-radius: 50%;
+  cursor: pointer;
+}
+.theme__button:hover {
+  filter: brightness(0.9);
 }
