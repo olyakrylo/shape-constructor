@@ -23,7 +23,7 @@ export const ShapeList = () => {
   return (
     <div className={cx(containerStyles.container, styles.container)}>
       <p className={containerStyles.title}>Shapes</p>
-      <ul className={listStyles.list}>
+      <ul className={cx(listStyles.list, styles.list)}>
         {SHAPE_LIST.map(({ type, name, icon }) => (
           <li key={type}>
             <button

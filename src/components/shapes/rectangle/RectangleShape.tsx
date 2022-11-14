@@ -9,12 +9,17 @@ export const RectangleShape = ({
   shape,
   fillCN,
   strokeCN,
+  backgroundCN,
 }: RectangleShapeProps) => {
   return (
     <svg
       width={shape.width + 20}
       height={shape.height + 20}
-      className={cx(shapeStyles[fillCN], shapeStyles[strokeCN])}
+      className={cx(
+        shapeStyles[fillCN],
+        shapeStyles[strokeCN],
+        shapeStyles[backgroundCN]
+      )}
       style={{ transform: `rotate(${shape.rotation}deg)` }}
     >
       <rect

@@ -1,11 +1,9 @@
 .list {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
+  display: grid;
+  grid-gap: 12px;
   padding: 0;
   margin: 0;
   list-style: none;
-  gap: 12px;
 }
 
 .list > li {
@@ -14,6 +12,7 @@
 
 .item {
   all: unset;
+  box-sizing: border-box;
   display: flex;
   align-items: center;
   padding: 10px 12px;

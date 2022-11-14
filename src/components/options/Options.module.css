@@ -6,17 +6,6 @@
   position: relative;
 }
 
-.option_remove {
-  border: 1px solid var(--red);
-  cursor: pointer;
-  transition: background-color 0.1s ease-in-out, color 0.1s ease-in-out;
-}
-
-.option_remove:hover {
-  background-color: var(--red);
-  color: var(--light);
-}
-
 .option__lock {
   all: unset;
   position: absolute;

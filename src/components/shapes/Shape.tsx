@@ -1,10 +1,4 @@
-import {
-  DRAG_DIRS,
-  DragDir,
-  ROTATION_DIRS,
-  ShapeI,
-  ShapeType,
-} from "../../entities/shape";
+import { DRAG_DIRS, ShapeI, ShapeType } from "../../entities/shape";
 import styles from "./Shape.module.css";
 import { RectangleShape } from "./rectangle/RectangleShape";
 import { EllipseShape } from "./ellipse/EllipseShape";
@@ -15,13 +9,18 @@ import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import {
   getSelectedShapeId,
   selectShape,
-  setShapeCoords,
-  setShapeValue,
+  setShapeData,
 } from "../../redux/shapes/slice";
-import React, { MouseEventHandler } from "react";
+import React, {
+  ChangeEvent,
+  ChangeEventHandler,
+  MouseEventHandler,
+} from "react";
 import cx from "classnames";
 import { usePointDragDrop } from "../../hooks/usePointDragDrop";
 import { useRotationDragDrop } from "../../hooks/useRotationDragDrop";
+import { TextShape } from "./text/TextShape";
+import { useOptions } from "../../hooks/useOptions";
 
 export type ShapeProps = {
   shape: ShapeI;
@@ -32,6 +31,11 @@ export interface ShapeItemProps<T extends ShapeI> {
   shape: T;
   fillCN: string;
   strokeCN: string;
+  colorCN: string;
+  backgroundCN: string;
+  onChangeData: (
+    event: ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
+  ) => void;
 }
 
 export const Shape = ({ shape, dragDropHandler }: ShapeProps) => {
@@ -39,27 +43,45 @@ export const Shape = ({ shape, dragDropHandler }: ShapeProps) => {
   const selectedShapeId = useAppSelector(getSelectedShapeId);
   const pointDragDrop = usePointDragDrop({ shape });
   const rotationDragDrop = useRotationDragDrop({ shape });
+  const options = useOptions();
+
+  const handleValueChange: ChangeEventHandler<
+    HTMLTextAreaElement | HTMLInputElement
+  > = (event) => {
+    event.stopPropagation();
+    const { value } = event.target;
+    dispatch(setShapeData({ id: shape.id, value }));
+  };
 
   const getShape = () => {
     const fillCN = `fill_${shape.fill}`;
     const strokeCN = `stroke_${shape.stroke}`;
+    const colorCN = `color_${shape.color}`;
+    const backgroundCN = `bg_${shape.background}`;
+
+    const props: Omit<ShapeItemProps<any>, "shape"> = {
+      fillCN,
+      strokeCN,
+      colorCN,
+      backgroundCN,
+      onChangeData: handleValueChange,
+    };
 
     switch (shape.type) {
       case ShapeType.rect:
-        return (
-          <RectangleShape shape={shape} fillCN={fillCN} strokeCN={strokeCN} />
-        );
+        return <RectangleShape shape={shape} {...props} />;
 
       case ShapeType.ellipse:
-        return (
-          <EllipseShape shape={shape} fillCN={fillCN} strokeCN={strokeCN} />
-        );
+        return <EllipseShape shape={shape} {...props} />;
 
       case ShapeType.line:
-        return <LineShape shape={shape} fillCN={fillCN} strokeCN={strokeCN} />;
+        return <LineShape shape={shape} {...props} />;
 
       case ShapeType.arrow:
-        return <ArrowShape shape={shape} fillCN={fillCN} strokeCN={strokeCN} />;
+        return <ArrowShape shape={shape} {...props} />;
+
+      case ShapeType.text:
+        return <TextShape shape={shape} {...props} />;
     }
   };
 
@@ -70,6 +92,10 @@ export const Shape = ({ shape, dragDropHandler }: ShapeProps) => {
 
   const isSelected = () => {
     return selectedShapeId === shape.id;
+  };
+
+  const handleRemove = () => {
+    options.remove(shape.id);
   };
 
   return (
@@ -83,7 +109,6 @@ export const Shape = ({ shape, dragDropHandler }: ShapeProps) => {
       }}
       {...dragDropHandler}
     >
-      {getShape()}
       {isSelected() && (
         <>
           <div
@@ -103,22 +128,15 @@ export const Shape = ({ shape, dragDropHandler }: ShapeProps) => {
             })}
 
             <button
-              className={cx(styles.rotation, styles.rotation_br)}
+              className={cx(styles.rotation)}
               onMouseDown={rotationDragDrop.handleDrag}
             />
-            {/*{ROTATION_DIRS.map((dir) => {*/}
-            {/*  const dirCN = `rotation_${dir}`;*/}
-            {/*  return (*/}
-            {/*    <button*/}
-            {/*      key={dir}*/}
-            {/*      className={cx(styles.rotation, styles[dirCN])}*/}
-            {/*      onMouseDown={rotationDragDrop.handleDrag}*/}
-            {/*    />*/}
-            {/*  );*/}
-            {/*})}*/}
+
+            <button className={cx(styles.remove)} onClick={handleRemove} />
           </div>
         </>
       )}
+      {getShape()}
     </div>
   );
 };

@@ -5,12 +5,16 @@ import { ShapeItemProps } from "../Shape";
 
 type LineShapeProps = ShapeItemProps<LineShapeI>;
 
-export const LineShape = ({ shape, strokeCN }: LineShapeProps) => {
+export const LineShape = ({
+  shape,
+  strokeCN,
+  backgroundCN,
+}: LineShapeProps) => {
   return (
     <svg
       width={shape.width + 20}
       height={shape.height}
-      className={cx(shapeStyles[strokeCN])}
+      className={cx(shapeStyles[strokeCN], shapeStyles[backgroundCN])}
       style={{ transform: `rotate(${shape.rotation}deg)` }}
     >
       <line

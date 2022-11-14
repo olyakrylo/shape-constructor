@@ -6,6 +6,7 @@ import { ReactComponent as ArrowDownIcon } from "./arrow-down.svg";
 import { ReactComponent as PolygonArrowDown } from "./polygon-arrow-down.svg";
 import { ReactComponent as LockClosedIcon } from "./lock-closed-icon.svg";
 import { ReactComponent as LockOpenIcon } from "./lock-open-icon.svg";
+import { ReactComponent as TextIcon } from "./text-icon.svg";
 
 export {
   RectIcon,
@@ -16,4 +17,5 @@ export {
   PolygonArrowDown,
   LockClosedIcon,
   LockOpenIcon,
+  TextIcon,
 };

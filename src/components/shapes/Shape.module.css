@@ -12,8 +12,10 @@
 
 .border {
   position: absolute;
-  width: 100%;
-  height: 100%;
+  top: -8px;
+  left: -8px;
+  right: -8px;
+  bottom: -8px;
   border: 1px dashed var(--gray);
 }
 
@@ -82,35 +84,40 @@
   width: 8px;
   height: 8px;
   cursor: move;
-}
-
-.rotation_tr {
-  top: -12px;
-  right: -12px;
-  border-top: 1px solid var(--dark);
-  border-right: 1px solid var(--dark);
-  border-top-right-radius: 2px;
-}
-.rotation_tl {
-  top: -12px;
-  left: -12px;
-  border-top: 1px solid var(--dark);
-  border-left: 1px solid var(--dark);
-  border-top-left-radius: 2px;
-}
-.rotation_br {
   bottom: -12px;
   right: -12px;
   border-bottom: 1px solid var(--dark);
   border-right: 1px solid var(--dark);
   border-bottom-right-radius: 2px;
 }
-.rotation_bl {
-  bottom: -12px;
-  left: -12px;
-  border-bottom: 1px solid var(--dark);
-  border-left: 1px solid var(--dark);
-  border-bottom-left-radius: 2px;
+
+.remove {
+  all: unset;
+  position: absolute;
+  top: -21px;
+  left: -21px;
+  width: 17px;
+  height: 17px;
+  cursor: pointer;
+}
+.remove:hover {
+  filter: brightness(0.9);
+}
+.remove::before,
+.remove::after {
+  content: "";
+  position: absolute;
+  width: 12px;
+  height: 1px;
+  top: 8px;
+  left: 3px;
+  background-color: var(--red);
+}
+.remove::before {
+  transform: rotate(45deg);
+}
+.remove::after {
+  transform: rotate(-45deg);
 }
 
 .fill_red {
@@ -155,4 +162,48 @@
 }
 .stroke_none {
   stroke: none;
+}
+
+.color_red {
+  color: var(--red);
+}
+.color_green {
+  color: var(--green);
+}
+.color_blue {
+  color: var(--blue);
+}
+.color_orange {
+  color: var(--orange);
+}
+.color_violet {
+  color: var(--violet);
+}
+.color_black {
+  color: var(--dark);
+}
+.color_none {
+  color: transparent;
+}
+
+.bg_red {
+  background-color: var(--red);
+}
+.bg_green {
+  background-color: var(--green);
+}
+.bg_blue {
+  background-color: var(--blue);
+}
+.bg_orange {
+  background-color: var(--orange);
+}
+.bg_violet {
+  background-color: var(--violet);
+}
+.bg_black {
+  background-color: var(--dark);
+}
+.bg_none {
+  background-color: transparent;
 }

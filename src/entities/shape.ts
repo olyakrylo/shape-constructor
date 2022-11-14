@@ -6,6 +6,7 @@ export enum ShapeType {
   ellipse = "ellipse",
   line = "line",
   arrow = "arrow",
+  text = "text",
 }
 
 export enum Color {
@@ -27,8 +28,12 @@ export interface CommonShapePropsI {
   rotation: number;
   fill: Color;
   stroke: Color;
+  color: Color;
+  background: Color;
   strokeWidth: number;
   locked?: boolean;
+  fontSize: number;
+  data: string;
 }
 
 export interface RectangleShapeI extends CommonShapePropsI {
@@ -47,7 +52,16 @@ export interface ArrowShapeI extends CommonShapePropsI {
   type: ShapeType.arrow;
 }
 
-export type ShapeI = RectangleShapeI | EllipseShapeI | LineShapeI | ArrowShapeI;
+export interface TextShapeI extends CommonShapePropsI {
+  type: ShapeType.text;
+}
+
+export type ShapeI =
+  | RectangleShapeI
+  | EllipseShapeI
+  | LineShapeI
+  | ArrowShapeI
+  | TextShapeI;
 
 export const SHAPE_LIST: {
   type: ShapeType;
@@ -74,6 +88,11 @@ export const SHAPE_LIST: {
     name: "Arrow",
     icon: "ArrowIcon",
   },
+  {
+    type: ShapeType.text,
+    name: "Text",
+    icon: "TextIcon",
+  },
 ];
 
 export const DRAG_DIRS = [
@@ -87,8 +106,6 @@ export const DRAG_DIRS = [
   "bottom_right",
 ];
 
-export const ROTATION_DIRS = ["tl", "tr", "bl", "br"];
-
 export type DragDir = typeof DRAG_DIRS[number];
 
 export const MIN_VALUE = (prop: ValueShapeProp): number => {
@@ -98,6 +115,7 @@ export const MIN_VALUE = (prop: ValueShapeProp): number => {
 };
 export const MAX_VALUE = (prop: ValueShapeProp): number => {
   if (prop === "strokeWidth") return 20;
+  if (prop === "fontSize") return 50;
   if (prop === "rotation") return 359;
   return 630;
 };
