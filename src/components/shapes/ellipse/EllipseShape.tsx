@@ -9,12 +9,17 @@ export const EllipseShape = ({
   shape,
   fillCN,
   strokeCN,
+  backgroundCN,
 }: EllipseShapeProps) => {
   return (
     <svg
       width={shape.width + 20}
       height={shape.height + 20}
-      className={cx(shapeStyles[fillCN], shapeStyles[strokeCN])}
+      className={cx(
+        shapeStyles[fillCN],
+        shapeStyles[strokeCN],
+        shapeStyles[backgroundCN]
+      )}
       style={{ transform: `rotate(${shape.rotation}deg)` }}
     >
       <ellipse

@@ -1,6 +1,10 @@
 .container {
 }
 
+.list {
+  grid-template-columns: 1fr 1fr;
+}
+
 .item {
   cursor: pointer;
   transition: filter 0.2s ease-in-out;

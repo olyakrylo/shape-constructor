@@ -67,10 +67,6 @@ export const Options = () => {
     options.changeValue(selectedShape.id, prop, operator);
   };
 
-  const handleRemove = () => {
-    options.remove(selectedShape.id);
-  };
-
   const handleLock = () => {
     dispatch(toggleLock({ id: selectedShape.id }));
   };
@@ -132,15 +128,6 @@ export const Options = () => {
             </div>
           </li>
         ))}
-
-        <li>
-          <button
-            onClick={handleRemove}
-            className={cx(listStyles.item, styles.option, styles.option_remove)}
-          >
-            Remove
-          </button>
-        </li>
       </ul>
     </div>
   );

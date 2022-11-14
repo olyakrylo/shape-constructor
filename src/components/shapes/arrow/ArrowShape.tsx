@@ -5,12 +5,16 @@ import shapeStyles from "../Shape.module.css";
 
 type ArrowShapeProps = ShapeItemProps<ArrowShapeI>;
 
-export const ArrowShape = ({ shape, strokeCN }: ArrowShapeProps) => {
+export const ArrowShape = ({
+  shape,
+  strokeCN,
+  backgroundCN,
+}: ArrowShapeProps) => {
   return (
     <svg
       width={shape.width + 20}
       height={shape.height}
-      className={cx(shapeStyles[strokeCN])}
+      className={cx(shapeStyles[strokeCN], shapeStyles[backgroundCN])}
       style={{ transform: `rotate(${shape.rotation}deg)` }}
     >
       <g strokeWidth={shape.strokeWidth} strokeLinecap={"round"}>

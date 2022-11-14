@@ -2,10 +2,15 @@ import { Color, ShapeI, ShapeType } from "./shape";
 
 export type ValueShapeProp = keyof Pick<
   ShapeI,
-  "width" | "height" | "strokeWidth" | "rotation"
+  "width" | "height" | "strokeWidth" | "rotation" | "fontSize"
 >;
 
-export type ColorShapeProp = keyof Pick<ShapeI, "fill" | "stroke">;
+export type ColorShapeProp = keyof Pick<
+  ShapeI,
+  "fill" | "stroke" | "color" | "background"
+>;
+
+export type StringShapeProp = keyof Pick<ShapeI, "data">;
 
 export type ShapeProp = ValueShapeProp | ColorShapeProp;
 
@@ -23,6 +28,14 @@ export interface ColorOptionI extends OptionI {
   property: ColorShapeProp;
 }
 
+const ALL_TYPES = [
+  ShapeType.rect,
+  ShapeType.ellipse,
+  ShapeType.line,
+  ShapeType.arrow,
+  ShapeType.text,
+];
+
 export const VALUE_OPTIONS: ValueOptionI[] = [
   {
     name: "Stroke width",
@@ -37,27 +50,27 @@ export const VALUE_OPTIONS: ValueOptionI[] = [
   {
     name: "Width",
     property: "width",
-    on: new Set([
-      ShapeType.rect,
-      ShapeType.ellipse,
-      ShapeType.line,
-      ShapeType.arrow,
-    ]),
+    on: new Set(ALL_TYPES),
   },
   {
     name: "Height",
     property: "height",
-    on: new Set([ShapeType.rect, ShapeType.ellipse, ShapeType.arrow]),
+    on: new Set([
+      ShapeType.rect,
+      ShapeType.ellipse,
+      ShapeType.arrow,
+      ShapeType.text,
+    ]),
   },
   {
     name: "Rotation",
     property: "rotation",
-    on: new Set([
-      ShapeType.rect,
-      ShapeType.ellipse,
-      ShapeType.line,
-      ShapeType.arrow,
-    ]),
+    on: new Set(ALL_TYPES),
+  },
+  {
+    name: "Font size",
+    property: "fontSize",
+    on: new Set([ShapeType.text]),
   },
 ];
 
@@ -76,6 +89,16 @@ export const COLOR_OPTIONS: ColorOptionI[] = [
       ShapeType.line,
       ShapeType.arrow,
     ]),
+  },
+  {
+    name: "Color",
+    property: "color",
+    on: new Set([ShapeType.text]),
+  },
+  {
+    name: "Background color",
+    property: "background",
+    on: new Set(ALL_TYPES),
   },
 ];
 

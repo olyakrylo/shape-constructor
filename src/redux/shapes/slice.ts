@@ -2,7 +2,11 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { Color, ShapeI, ShapeType } from "../../entities/shape";
 import { v4 as uuid } from "uuid";
 import { RootState } from "../store";
-import { ColorShapeProp, ValueShapeProp } from "../../entities/options";
+import {
+  ColorShapeProp,
+  StringShapeProp,
+  ValueShapeProp,
+} from "../../entities/options";
 
 export interface ShapeState {
   shapes: Record<string, ShapeI>;
@@ -53,8 +57,12 @@ export const shapesSlice = createSlice({
         left: 20,
         rotation: 0,
         fill: Color.none,
+        color: Color.black,
         stroke: Color.black,
+        background: Color.none,
         strokeWidth: 1,
+        fontSize: 12,
+        data: "",
       };
       state.selected = id;
     },
@@ -96,6 +104,16 @@ export const shapesSlice = createSlice({
       }
       state.shapes[id][prop] = value;
     },
+    setShapeData: (
+      state,
+      action: PayloadAction<{
+        id: string;
+        value: string;
+      }>
+    ) => {
+      const { id, value } = action.payload;
+      state.shapes[id].data = value;
+    },
     setShapeCoords: (
       state,
       action: PayloadAction<{ id: string; top: number; left: number }>
@@ -120,6 +138,7 @@ export const {
   selectShape,
   setShapeColor,
   setShapeValue,
+  setShapeData,
   setShapeCoords,
   setDragging,
   toggleLock,
