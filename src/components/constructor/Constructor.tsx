@@ -8,9 +8,12 @@ import {
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import { Shape } from "../shapes/Shape";
 import { useShapeDragDrop } from "../../hooks/useShapeDragDrop";
-import { useEffect, useRef, MouseEvent } from "react";
+import { useEffect, useRef } from "react";
+import { useShapeControl } from "../../hooks/useShapeControl";
 
 export const Constructor = () => {
+  useShapeControl();
+
   const dispatch = useAppDispatch();
   const shapes = useAppSelector(getShapes);
   const dragging = useAppSelector(isShapeDragging);
@@ -24,8 +27,7 @@ export const Constructor = () => {
     }
   });
 
-  const resetSelectedShape = (event: MouseEvent) => {
-    console.log(event);
+  const resetSelectedShape = () => {
     dispatch(selectShape({ id: null }));
   };
 

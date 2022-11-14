@@ -8,6 +8,7 @@ import {
 } from "../redux/shapes/slice";
 import { KeyboardEvent } from "react";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
+import { ARROW_KEYS, ArrowKey } from "../entities/events";
 
 export const useOptions = () => {
   const shapes = useAppSelector(getShapes);
@@ -45,12 +46,15 @@ export const useOptions = () => {
     id: string,
     prop: ValueShapeProp
   ) => {
+    event.stopPropagation();
+    if (!ARROW_KEYS.has(event.key)) return;
+
     let oldValue = shapes[id][prop];
-    if (event.key === "ArrowUp") {
+    if (event.key === ArrowKey.up) {
       dispatch(
         setShapeValue({ id, prop, value: getNewValue(prop, oldValue, "add") })
       );
-    } else if (event.key === "ArrowDown") {
+    } else if (event.key === ArrowKey.down) {
       dispatch(
         setShapeValue({
           id,

@@ -66,6 +66,12 @@ export const shapesSlice = createSlice({
       };
       state.selected = id;
     },
+    copyShape: (state, action: PayloadAction<{ shape: ShapeI }>) => {
+      const { shape } = action.payload;
+      const id = uuid();
+      state.shapes[id] = { ...shape, id, top: 20, left: 20 };
+      state.selected = id;
+    },
     removeShape: (state, action: PayloadAction<{ id: string }>) => {
       const { id } = action.payload;
       delete state.shapes[id];
@@ -142,6 +148,7 @@ export const {
   setShapeCoords,
   setDragging,
   toggleLock,
+  copyShape,
 } = shapesSlice.actions;
 
 export const getShapes = (state: RootState) => state.shapes.shapes;
