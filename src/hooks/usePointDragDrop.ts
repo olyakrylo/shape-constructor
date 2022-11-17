@@ -1,5 +1,5 @@
 import { useAppDispatch } from "../redux/hooks";
-import { DragDir, ShapeI } from "../entities/shape";
+import { DragDir, RoundPercentage, ShapeI } from "../entities/shape";
 import React from "react";
 import {
   setDragging,
@@ -7,9 +7,17 @@ import {
   setShapeValue,
 } from "../redux/shapes/slice";
 
-type UsePointDragDropProps = { shape: ShapeI };
+type UsePointDragDropProps = {
+  shape: ShapeI;
+  containerWidth: number;
+  containerHeight: number;
+};
 
-export const usePointDragDrop = ({ shape }: UsePointDragDropProps) => {
+export const usePointDragDrop = ({
+  shape,
+  containerHeight,
+  containerWidth,
+}: UsePointDragDropProps) => {
   const dispatch = useAppDispatch();
 
   const handlePointMouseDown = (
@@ -22,8 +30,8 @@ export const usePointDragDrop = ({ shape }: UsePointDragDropProps) => {
 
     const handleMove = (moveEvent: MouseEvent) => {
       const { clientX: currX, clientY: currY } = moveEvent;
-      const diffX = startX - currX;
-      const diffY = startY - currY;
+      const diffX = RoundPercentage((startX - currX) / containerWidth, "size");
+      const diffY = RoundPercentage((startY - currY) / containerHeight, "size");
 
       let newHeight;
       let newWidth;

@@ -19,11 +19,14 @@ export const useShapeControl = () => {
     const keyboardHandler = (event: KeyboardEvent) => {
       if (!selectedShape) return;
 
+      event.stopPropagation();
+      event.preventDefault();
+
       if (event.key === EventKey.backspace) {
         dispatch(removeShape({ id: selectedShape.id }));
       } else if (ARROW_KEYS.has(event.key)) {
-        let shift = 1;
-        if (event.shiftKey) shift = 10;
+        let shift = 0.001;
+        if (event.shiftKey) shift = 0.01;
         if (event.ctrlKey || event.metaKey) {
           if (event.key === ArrowKey.up || event.key === ArrowKey.down) {
             shift = selectedShape.height;
@@ -55,6 +58,7 @@ export const useShapeControl = () => {
 
   useEffect(() => {
     const copyHandler = () => {
+      console.log("copy");
       if (!selectedShape) return;
       setCopiedShape(selectedShape);
     };

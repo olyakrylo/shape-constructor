@@ -1,6 +1,16 @@
-.canvas {
+.header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.canvasContainer {
   width: 650px;
   height: 650px;
+  overflow: auto;
+  position: relative;
+}
+
+.canvas {
   background: var(--light);
   box-shadow: 0 5px 10px var(--box-shadow-color);
   border-radius: 4px;
@@ -8,7 +18,30 @@
   overflow: hidden;
 }
 
+.markup {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  stroke: var(--dark);
+}
+.markup[aria-hidden="true"] {
+  visibility: hidden;
+}
+
+.markup__primary {
+  opacity: 0.3;
+}
+.markup__secondary {
+  opacity: 0.2;
+}
+.markup__tertiary {
+  opacity: 0.1;
+}
+
 .overlay {
+  /*background-color: lightblue;*/
   position: absolute;
   top: 0;
   left: 0;

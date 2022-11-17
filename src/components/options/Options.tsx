@@ -17,7 +17,12 @@ import {
 } from "../../entities/options";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import { getSelectedShape, toggleLock } from "../../redux/shapes/slice";
-import { Color, MAX_VALUE, MIN_VALUE } from "../../entities/shape";
+import {
+  Color,
+  MAX_VALUE,
+  MIN_VALUE,
+  PERCENTAGE_PROPS,
+} from "../../entities/shape";
 import { KeyboardEvent } from "react";
 import { useOptions } from "../../hooks/useOptions";
 
@@ -71,13 +76,41 @@ export const Options = () => {
     dispatch(toggleLock({ id: selectedShape.id }));
   };
 
+  const inputValue = (prop: ValueShapeProp): number => {
+    if (PERCENTAGE_PROPS.includes(prop)) {
+      return Math.round(selectedShape[prop] * 100);
+    } else {
+      return selectedShape[prop];
+    }
+  };
+
+  const measure = (prop: ValueShapeProp): string => {
+    switch (prop) {
+      case "rotation":
+        return "deg";
+
+      case "fontSize":
+      case "strokeWidth":
+        return "px";
+
+      case "height":
+      case "width":
+        return "%";
+    }
+  };
+
   return (
     <div className={cx(containerStyles.container, styles.container)}>
       <p className={containerStyles.title}>Options</p>
       <ul className={listStyles.list}>
         {valueOptions().map(({ property, name }, i) => (
           <li key={name} className={cx(listStyles.item, styles.option)}>
-            <span className={styles.option__name}>{name}</span>
+            <span className={styles.option__name}>
+              {name}{" "}
+              <span className={styles.option__measure}>
+                {measure(property)}
+              </span>
+            </span>
             <div className={styles.size}>
               <button
                 className={cx(styles.size__button, styles.lower)}
@@ -87,7 +120,7 @@ export const Options = () => {
                 <PolygonArrowDown className={styles.button__icon} />
               </button>
               <input
-                value={selectedShape[property]}
+                value={inputValue(property)}
                 onChange={(e) => handleInputChange(property, e.target.value)}
                 onKeyDown={(e) => handleInputKeyDown(e, property)}
                 className={styles.size__input}
@@ -101,15 +134,15 @@ export const Options = () => {
               </button>
             </div>
 
-            {lock(property, i) && (
-              <button
-                className={styles.option__lock}
-                aria-checked={selectedShape.locked}
-                onClick={handleLock}
-              >
-                {selectedShape.locked ? <LockClosedIcon /> : <LockOpenIcon />}
-              </button>
-            )}
+            {/*{lock(property, i) && (*/}
+            {/*  <button*/}
+            {/*    className={styles.option__lock}*/}
+            {/*    aria-checked={selectedShape.locked}*/}
+            {/*    onClick={handleLock}*/}
+            {/*  >*/}
+            {/*    {selectedShape.locked ? <LockClosedIcon /> : <LockOpenIcon />}*/}
+            {/*  </button>*/}
+            {/*)}*/}
           </li>
         ))}
 

@@ -183,7 +183,7 @@
   color: var(--dark);
 }
 .color_none {
-  color: transparent;
+  color: var(--light);
 }
 
 .bg_red {

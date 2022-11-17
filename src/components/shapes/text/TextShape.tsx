@@ -11,6 +11,8 @@ export const TextShape = ({
   colorCN,
   backgroundCN,
   onChangeData,
+  width,
+  height,
 }: TextShapeProps) => {
   return (
     <div
@@ -20,8 +22,8 @@ export const TextShape = ({
         styles.container
       )}
       style={{
-        width: shape.width,
-        height: shape.height,
+        width,
+        height,
         transform: `rotate(${shape.rotation}deg)`,
       }}
     >
@@ -33,6 +35,7 @@ export const TextShape = ({
         }}
         onChange={onChangeData}
         value={shape.data}
+        onKeyDown={(e) => e.stopPropagation()}
       />
     </div>
   );

@@ -111,11 +111,21 @@ export type DragDir = typeof DRAG_DIRS[number];
 export const MIN_VALUE = (prop: ValueShapeProp): number => {
   if (prop === "strokeWidth") return 0;
   if (prop === "rotation") return -359;
-  return 1;
+  return 0.01;
 };
 export const MAX_VALUE = (prop: ValueShapeProp): number => {
   if (prop === "strokeWidth") return 20;
   if (prop === "fontSize") return 50;
   if (prop === "rotation") return 359;
-  return 630;
+  return 1;
+};
+
+export const PERCENTAGE_PROPS: ValueShapeProp[] = ["height", "width"];
+
+export const RoundPercentage = (
+  value: number,
+  meas: "size" | "offset"
+): number => {
+  const accuracy = meas === "size" ? 100 : 1000;
+  return Math.round(value * accuracy) / accuracy;
 };
