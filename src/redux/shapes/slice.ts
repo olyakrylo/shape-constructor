@@ -7,17 +7,22 @@ import {
   StringShapeProp,
   ValueShapeProp,
 } from "../../entities/options";
+import { Root } from "react-dom/client";
 
 export interface ShapeState {
   shapes: Record<string, ShapeI>;
   selected: string | null;
   dragging: boolean;
+  markup: boolean;
+  zoom: number;
 }
 
 const initialState: ShapeState = {
   shapes: {},
   selected: null,
   dragging: false,
+  markup: false,
+  zoom: 1,
 };
 
 export const shapesSlice = createSlice({
@@ -40,21 +45,21 @@ export const shapesSlice = createSlice({
       let height;
       switch (action.payload.type) {
         case ShapeType.line:
-          height = 20;
+          height = 0.02;
           break;
         case ShapeType.arrow:
-          height = 40;
+          height = 0.04;
           break;
         default:
-          height = 100;
+          height = 0.1;
       }
       state.shapes[id] = {
         id,
         type: action.payload.type,
         height,
-        width: 100,
-        top: 20,
-        left: 20,
+        width: 0.1,
+        top: 0.1,
+        left: 0.1,
         rotation: 0,
         fill: Color.none,
         color: Color.black,
@@ -69,7 +74,7 @@ export const shapesSlice = createSlice({
     copyShape: (state, action: PayloadAction<{ shape: ShapeI }>) => {
       const { shape } = action.payload;
       const id = uuid();
-      state.shapes[id] = { ...shape, id, top: 20, left: 20 };
+      state.shapes[id] = { ...shape, id, top: 0.1, left: 0.1 };
       state.selected = id;
     },
     removeShape: (state, action: PayloadAction<{ id: string }>) => {
@@ -98,16 +103,16 @@ export const shapesSlice = createSlice({
       action: PayloadAction<{ id: string; prop: ValueShapeProp; value: number }>
     ) => {
       const { id, prop, value } = action.payload;
-      if (state.shapes[id].locked) {
-        const lastWidth = state.shapes[id].width;
-        const lastHeight = state.shapes[id].height;
-        const rel = lastWidth / lastHeight;
-        if (prop === "width") {
-          state.shapes[id].height = Math.round((value / rel) * 100) / 100;
-        } else if (prop === "height") {
-          state.shapes[id].width = Math.round(value * rel * 100) / 100;
-        }
-      }
+      // if (state.shapes[id].locked) {
+      //   const lastWidth = state.shapes[id].width;
+      //   const lastHeight = state.shapes[id].height;
+      //   const rel = lastWidth / lastHeight;
+      //   if (prop === "width") {
+      //     state.shapes[id].height = Math.round((value / rel) * 100) / 100;
+      //   } else if (prop === "height") {
+      //     state.shapes[id].width = Math.round(value * rel * 100) / 100;
+      //   }
+      // }
       state.shapes[id][prop] = value;
     },
     setShapeData: (
@@ -135,6 +140,23 @@ export const shapesSlice = createSlice({
       const { id } = action.payload;
       state.shapes[id].locked = !state.shapes[id].locked;
     },
+    toggleMarkup: (state) => {
+      state.markup = !state.markup;
+    },
+    changeZoom: (
+      state,
+      action: PayloadAction<{ mode: "add" | "subtract" }>
+    ) => {
+      const { mode } = action.payload;
+      if (mode === "add") {
+        state.zoom += 0.1;
+      } else {
+        state.zoom -= 0.1;
+      }
+    },
+    resetZoom: (state) => {
+      state.zoom = 1;
+    },
   },
 });
 
@@ -149,6 +171,9 @@ export const {
   setDragging,
   toggleLock,
   copyShape,
+  toggleMarkup,
+  changeZoom,
+  resetZoom,
 } = shapesSlice.actions;
 
 export const getShapes = (state: RootState) => state.shapes.shapes;
@@ -159,5 +184,9 @@ export const getSelectedShape = (state: RootState) => {
   return state.shapes.shapes[selectedId];
 };
 export const isShapeDragging = (state: RootState) => state.shapes.dragging;
+
+export const getMarkupState = (state: RootState) => state.shapes.markup;
+
+export const getZoom = (state: RootState) => state.shapes.zoom;
 
 export default shapesSlice.reducer;

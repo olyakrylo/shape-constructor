@@ -1,5 +1,11 @@
 import { ColorShapeProp, ValueShapeProp } from "../entities/options";
-import { Color, MAX_VALUE, MIN_VALUE } from "../entities/shape";
+import {
+  Color,
+  MAX_VALUE,
+  MIN_VALUE,
+  PERCENTAGE_PROPS,
+  RoundPercentage,
+} from "../entities/shape";
 import {
   getShapes,
   removeShape,
@@ -29,15 +35,18 @@ export const useOptions = () => {
     prop: ValueShapeProp,
     value: string
   ) => {
-    const numValue = Math.round(parseFloat(value) * 100) / 100;
+    let numValue;
+    if (PERCENTAGE_PROPS.includes(prop)) {
+      numValue = RoundPercentage(parseInt(value, 10) / 100, "size");
+    } else {
+      numValue = parseInt(value, 10);
+    }
     if (!Object.is(numValue, NaN)) {
       const value = Math.max(
         Math.min(MAX_VALUE(prop), numValue),
         MIN_VALUE(prop)
       );
       dispatch(setShapeValue({ id, prop, value }));
-    } else {
-      dispatch(setShapeValue({ id, prop, value: MIN_VALUE(prop) }));
     }
   };
 
@@ -83,11 +92,19 @@ export const useOptions = () => {
     let newValue;
     switch (operator) {
       case "add":
-        newValue = oldValue + 1;
+        if (PERCENTAGE_PROPS.includes(prop)) {
+          newValue = RoundPercentage(oldValue + 0.01, "size");
+        } else {
+          newValue = oldValue + 1;
+        }
         return Math.min(MAX_VALUE(prop), newValue);
 
       case "subtract":
-        newValue = oldValue - 1;
+        if (PERCENTAGE_PROPS.includes(prop)) {
+          newValue = RoundPercentage(oldValue - 0.01, "size");
+        } else {
+          newValue = oldValue - 1;
+        }
         return Math.max(MIN_VALUE(prop), newValue);
     }
   };

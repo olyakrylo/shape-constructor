@@ -9,32 +9,29 @@ export const ArrowShape = ({
   shape,
   strokeCN,
   backgroundCN,
+  width,
+  height,
 }: ArrowShapeProps) => {
   return (
     <svg
-      width={shape.width + 20}
-      height={shape.height}
+      width={width + 20}
+      height={height}
       className={cx(shapeStyles[strokeCN], shapeStyles[backgroundCN])}
       style={{ transform: `rotate(${shape.rotation}deg)` }}
     >
       <g strokeWidth={shape.strokeWidth} strokeLinecap={"round"}>
+        <line x1={10} x2={width + 10} y1={height / 2} y2={height / 2} />
         <line
-          x1={10}
-          x2={shape.width + 10}
-          y1={shape.height / 2}
-          y2={shape.height / 2}
-        />
-        <line
-          x1={shape.width + 10 - shape.width / 10}
-          x2={shape.width + 10}
+          x1={width + 10 - width / 10}
+          x2={width + 10}
           y1={10}
-          y2={shape.height / 2}
+          y2={height / 2}
         />
         <line
-          x1={shape.width + 10 - shape.width / 10}
-          x2={shape.width + 10}
-          y1={shape.height - 10}
-          y2={shape.height / 2}
+          x1={width + 10 - width / 10}
+          x2={width + 10}
+          y1={height - 10}
+          y2={height / 2}
         />
       </g>
     </svg>

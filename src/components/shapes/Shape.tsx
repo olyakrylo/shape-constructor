@@ -15,6 +15,7 @@ import React, {
   ChangeEvent,
   ChangeEventHandler,
   MouseEventHandler,
+  MutableRefObject,
 } from "react";
 import cx from "classnames";
 import { usePointDragDrop } from "../../hooks/usePointDragDrop";
@@ -25,6 +26,8 @@ import { useOptions } from "../../hooks/useOptions";
 export type ShapeProps = {
   shape: ShapeI;
   dragDropHandler: DragDropHandler;
+  containerWidth: number;
+  containerHeight: number;
 };
 
 export interface ShapeItemProps<T extends ShapeI> {
@@ -33,15 +36,26 @@ export interface ShapeItemProps<T extends ShapeI> {
   strokeCN: string;
   colorCN: string;
   backgroundCN: string;
+  width: number;
+  height: number;
   onChangeData: (
     event: ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
   ) => void;
 }
 
-export const Shape = ({ shape, dragDropHandler }: ShapeProps) => {
+export const Shape = ({
+  shape,
+  dragDropHandler,
+  containerWidth,
+  containerHeight,
+}: ShapeProps) => {
   const dispatch = useAppDispatch();
   const selectedShapeId = useAppSelector(getSelectedShapeId);
-  const pointDragDrop = usePointDragDrop({ shape });
+  const pointDragDrop = usePointDragDrop({
+    shape,
+    containerWidth,
+    containerHeight,
+  });
   const rotationDragDrop = useRotationDragDrop({ shape });
   const options = useOptions();
 
@@ -54,16 +68,13 @@ export const Shape = ({ shape, dragDropHandler }: ShapeProps) => {
   };
 
   const getShape = () => {
-    const fillCN = `fill_${shape.fill}`;
-    const strokeCN = `stroke_${shape.stroke}`;
-    const colorCN = `color_${shape.color}`;
-    const backgroundCN = `bg_${shape.background}`;
-
     const props: Omit<ShapeItemProps<any>, "shape"> = {
-      fillCN,
-      strokeCN,
-      colorCN,
-      backgroundCN,
+      fillCN: `fill_${shape.fill}`,
+      strokeCN: `stroke_${shape.stroke}`,
+      colorCN: `color_${shape.color}`,
+      backgroundCN: `bg_${shape.background}`,
+      width: containerWidth * shape.width,
+      height: containerHeight * shape.height,
       onChangeData: handleValueChange,
     };
 
@@ -98,6 +109,12 @@ export const Shape = ({ shape, dragDropHandler }: ShapeProps) => {
     options.remove(shape.id);
   };
 
+  const getTransform = () => {
+    const x = shape.left * containerWidth;
+    const y = shape.top * containerHeight;
+    return `translate(${x}px, ${y}px)`;
+  };
+
   return (
     <div
       id={shape.id}
@@ -105,7 +122,7 @@ export const Shape = ({ shape, dragDropHandler }: ShapeProps) => {
       aria-selected={isSelected()}
       onClick={select}
       style={{
-        transform: `translate(${shape.left}px, ${shape.top}px)`,
+        transform: getTransform(),
       }}
       {...dragDropHandler}
     >

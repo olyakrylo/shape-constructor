@@ -10,11 +10,13 @@ export const EllipseShape = ({
   fillCN,
   strokeCN,
   backgroundCN,
+  width,
+  height,
 }: EllipseShapeProps) => {
   return (
     <svg
-      width={shape.width + 20}
-      height={shape.height + 20}
+      width={width + 20}
+      height={height + 20}
       className={cx(
         shapeStyles[fillCN],
         shapeStyles[strokeCN],
@@ -23,10 +25,10 @@ export const EllipseShape = ({
       style={{ transform: `rotate(${shape.rotation}deg)` }}
     >
       <ellipse
-        cx={shape.width / 2 + 10}
-        cy={shape.height / 2 + 10}
-        rx={shape.width / 2}
-        ry={shape.height / 2}
+        cx={width / 2 + 10}
+        cy={height / 2 + 10}
+        rx={width / 2}
+        ry={height / 2}
         strokeWidth={shape.strokeWidth}
       />
     </svg>
