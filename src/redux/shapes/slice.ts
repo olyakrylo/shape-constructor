@@ -91,7 +91,7 @@ export const shapesSlice = createSlice({
       state,
       action: PayloadAction<{
         id: string;
-        color: Color;
+        color: Color | string;
         prop: ColorShapeProp;
       }>
     ) => {

@@ -1,30 +1,25 @@
 import { ShapeItemProps } from "../Shape";
-import { TextShapeI } from "../../../entities/shape";
+import { Color, TextShapeI } from "../../../entities/shape";
 import cx from "classnames";
-import shapeStyles from "../Shape.module.css";
 import styles from "./TextShape.module.css";
 
 type TextShapeProps = ShapeItemProps<TextShapeI>;
 
 export const TextShape = ({
   shape,
-  colorCN,
-  backgroundCN,
   onChangeData,
   width,
   height,
 }: TextShapeProps) => {
   return (
     <div
-      className={cx(
-        shapeStyles[backgroundCN],
-        shapeStyles[colorCN],
-        styles.container
-      )}
+      className={cx(styles.container)}
       style={{
         width,
         height,
         transform: `rotate(${shape.rotation}deg)`,
+        color: shape.color === Color.none ? "transparent" : shape.color,
+        background: shape.background,
       }}
     >
       <input

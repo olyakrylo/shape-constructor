@@ -1,0 +1,37 @@
+.container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.pickerToggle {
+  display: flex;
+  padding: 0;
+  width: 20px;
+  height: 20px;
+  border: none;
+  outline: none;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.picker {
+  position: absolute;
+  right: 26px;
+  transition: transform 0.2s ease-in-out;
+  z-index: 200;
+}
+
+.picker[aria-hidden="true"] {
+  transform: scaleY(0);
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 100;
+}

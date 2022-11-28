@@ -102,14 +102,14 @@ export const COLOR_OPTIONS: ColorOptionI[] = [
   },
 ];
 
-export const COLORS = [
-  Color.red,
-  Color.green,
-  Color.blue,
-  Color.orange,
-  Color.violet,
-  Color.black,
-  Color.none,
+export const COLORS = [Color.black, Color.none];
+
+export const PRESET_COLORS = [
+  "#CD5C5D",
+  "#3BB471",
+  "#1D90FF",
+  "#FF7F4E",
+  "#EE81EE",
 ];
 
 export const LOCK: Partial<Record<ValueShapeProp, ValueShapeProp>> = {
