@@ -1,11 +1,12 @@
 {
   "files": {
-    "main.css": "./static/css/main.baa8642b.css",
-    "main.js": "./static/js/main.e35df5bc.js",
+    "main.css": "./static/css/main.9cea589d.css",
+    "main.js": "./static/js/main.cda7e169.js",
     "static/media/Inter-SemiBold.ttf": "./static/media/Inter-SemiBold.4d56bb21f2399db8ad48.ttf",
     "static/media/Inter-Regular.ttf": "./static/media/Inter-Regular.e89cb19905e7db5591b0.ttf",
     "static/media/theme-icon.svg": "./static/media/theme-icon.286455e8cef6e43433646cbc15b9c0e6.svg",
     "static/media/lock-closed-icon.svg": "./static/media/lock-closed-icon.1bc4f711fb3742c9bfd0d78f45f3d12f.svg",
+    "static/media/color-icon.svg": "./static/media/color-icon.cb6796b099ccaafc854ddbc8a8140c56.svg",
     "static/media/lock-open-icon.svg": "./static/media/lock-open-icon.3876326b1b5d81fa1970fb71d4929a04.svg",
     "index.html": "./index.html",
     "static/media/text-icon.svg": "./static/media/text-icon.f9e609b2389376665034df7121036757.svg",
@@ -19,11 +20,11 @@
     "static/media/rect-icon.svg": "./static/media/rect-icon.4fe37da154cfa1e3311e279c3ebabdf7.svg",
     "static/media/circle-icon.svg": "./static/media/circle-icon.bf61ab2ff180ee49c20a5cc78f2016b3.svg",
     "static/media/minus-icon.svg": "./static/media/minus-icon.82441d9e6c51babe2c86e51680fbe22f.svg",
-    "main.baa8642b.css.map": "./static/css/main.baa8642b.css.map",
-    "main.e35df5bc.js.map": "./static/js/main.e35df5bc.js.map"
+    "main.9cea589d.css.map": "./static/css/main.9cea589d.css.map",
+    "main.cda7e169.js.map": "./static/js/main.cda7e169.js.map"
   },
   "entrypoints": [
-    "static/css/main.baa8642b.css",
-    "static/js/main.e35df5bc.js"
+    "static/css/main.9cea589d.css",
+    "static/js/main.cda7e169.js"
   ]
 }
