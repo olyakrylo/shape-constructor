@@ -1,5 +1,5 @@
 import { IconName } from "./icon";
-import { ShapeProp, ValueShapeProp } from "./options";
+import { ValueShapeProp } from "./options";
 
 export enum ShapeType {
   rect = "rect",
@@ -10,13 +10,8 @@ export enum ShapeType {
 }
 
 export enum Color {
-  red = "red",
-  green = "green",
-  blue = "blue",
-  orange = "orange",
-  violet = "violet",
   none = "none",
-  black = "black",
+  black = "var(--dark)",
 }
 
 export interface CommonShapePropsI {
@@ -26,10 +21,10 @@ export interface CommonShapePropsI {
   top: number;
   left: number;
   rotation: number;
-  fill: Color;
-  stroke: Color;
-  color: Color;
-  background: Color;
+  fill: Color | string;
+  stroke: Color | string;
+  color: Color | string;
+  background: Color | string;
   strokeWidth: number;
   locked?: boolean;
   fontSize: number;

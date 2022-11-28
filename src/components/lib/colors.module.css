@@ -1,8 +1,3 @@
-.container {
-  display: flex;
-  gap: 8px;
-}
-
 .item {
   all: unset;
   width: 20px;
@@ -35,19 +30,4 @@
 }
 .item.black {
   background-color: var(--dark);
-}
-.item.red {
-  background-color: var(--red);
-}
-.item.green {
-  background-color: var(--green);
-}
-.item.blue {
-  background-color: var(--blue);
-}
-.item.orange {
-  background-color: var(--orange);
-}
-.item.violet {
-  background-color: var(--violet);
 }

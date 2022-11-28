@@ -1,28 +1,19 @@
 import { EllipseShapeI } from "../../../entities/shape";
 import { ShapeItemProps } from "../Shape";
-import cx from "classnames";
-import shapeStyles from "../Shape.module.css";
 
 type EllipseShapeProps = ShapeItemProps<EllipseShapeI>;
 
-export const EllipseShape = ({
-  shape,
-  fillCN,
-  strokeCN,
-  backgroundCN,
-  width,
-  height,
-}: EllipseShapeProps) => {
+export const EllipseShape = ({ shape, width, height }: EllipseShapeProps) => {
   return (
     <svg
       width={width + 20}
       height={height + 20}
-      className={cx(
-        shapeStyles[fillCN],
-        shapeStyles[strokeCN],
-        shapeStyles[backgroundCN]
-      )}
-      style={{ transform: `rotate(${shape.rotation}deg)` }}
+      fill={shape.fill}
+      stroke={shape.stroke}
+      style={{
+        transform: `rotate(${shape.rotation}deg)`,
+        background: shape.background,
+      }}
     >
       <ellipse
         cx={width / 2 + 10}

@@ -15,7 +15,6 @@ import React, {
   ChangeEvent,
   ChangeEventHandler,
   MouseEventHandler,
-  MutableRefObject,
 } from "react";
 import cx from "classnames";
 import { usePointDragDrop } from "../../hooks/usePointDragDrop";
@@ -32,10 +31,6 @@ export type ShapeProps = {
 
 export interface ShapeItemProps<T extends ShapeI> {
   shape: T;
-  fillCN: string;
-  strokeCN: string;
-  colorCN: string;
-  backgroundCN: string;
   width: number;
   height: number;
   onChangeData: (
@@ -69,10 +64,6 @@ export const Shape = ({
 
   const getShape = () => {
     const props: Omit<ShapeItemProps<any>, "shape"> = {
-      fillCN: `fill_${shape.fill}`,
-      strokeCN: `stroke_${shape.stroke}`,
-      colorCN: `color_${shape.color}`,
-      backgroundCN: `bg_${shape.background}`,
       width: containerWidth * shape.width,
       height: containerHeight * shape.height,
       onChangeData: handleValueChange,

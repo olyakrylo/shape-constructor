@@ -12,6 +12,7 @@ import { ReactComponent as MarkupIcon } from "./markup-icon.svg";
 import { ReactComponent as PlusIcon } from "./plus-icon.svg";
 import { ReactComponent as MinusIcon } from "./minus-icon.svg";
 import { ReactComponent as ZoomIcon } from "./zoom-icon.svg";
+import { ReactComponent as ColorIcon } from "./color-icon.svg";
 
 export {
   RectIcon,
@@ -28,4 +29,5 @@ export {
   PlusIcon,
   MinusIcon,
   ZoomIcon,
+  ColorIcon,
 };

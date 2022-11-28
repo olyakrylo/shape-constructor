@@ -3,7 +3,7 @@ import listStyles from "../lib/list.module.css";
 import colorStyles from "../lib/colors.module.css";
 import styles from "./Options.module.css";
 import cx from "classnames";
-import { LockClosedIcon, LockOpenIcon, PolygonArrowDown } from "../../icons";
+import { ColorIcon, PolygonArrowDown } from "../../icons";
 import {
   COLOR_OPTIONS,
   ColorOptionI,
@@ -25,6 +25,8 @@ import {
 } from "../../entities/shape";
 import { KeyboardEvent } from "react";
 import { useOptions } from "../../hooks/useOptions";
+import { ChromePicker, SketchPicker, TwitterPicker } from "react-color";
+import { ColorPicker } from "./colorPicker/ColorPicker";
 
 export const Options = () => {
   const selectedShape = useAppSelector(getSelectedShape);
@@ -149,16 +151,7 @@ export const Options = () => {
         {colorOptions().map((option) => (
           <li key={option.name} className={cx(listStyles.item, styles.option)}>
             <span className={styles.option__name}>{option.name}</span>
-            <div className={colorStyles.container}>
-              {COLORS.map((color) => (
-                <button
-                  key={color}
-                  onClick={() => handleColorChange(option.property, color)}
-                  aria-selected={color === selectedShape[option.property]}
-                  className={cx(colorStyles.item, colorStyles[color])}
-                />
-              ))}
-            </div>
+            <ColorPicker property={option.property} />
           </li>
         ))}
       </ul>

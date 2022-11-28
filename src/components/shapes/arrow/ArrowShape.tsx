@@ -1,23 +1,18 @@
 import { ArrowShapeI } from "../../../entities/shape";
 import { ShapeItemProps } from "../Shape";
-import cx from "classnames";
-import shapeStyles from "../Shape.module.css";
 
 type ArrowShapeProps = ShapeItemProps<ArrowShapeI>;
 
-export const ArrowShape = ({
-  shape,
-  strokeCN,
-  backgroundCN,
-  width,
-  height,
-}: ArrowShapeProps) => {
+export const ArrowShape = ({ shape, width, height }: ArrowShapeProps) => {
   return (
     <svg
       width={width + 20}
       height={height}
-      className={cx(shapeStyles[strokeCN], shapeStyles[backgroundCN])}
-      style={{ transform: `rotate(${shape.rotation}deg)` }}
+      stroke={shape.stroke}
+      style={{
+        transform: `rotate(${shape.rotation}deg)`,
+        background: shape.background,
+      }}
     >
       <g strokeWidth={shape.strokeWidth} strokeLinecap={"round"}>
         <line x1={10} x2={width + 10} y1={height / 2} y2={height / 2} />

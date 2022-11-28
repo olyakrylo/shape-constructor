@@ -1,23 +1,18 @@
 import { LineShapeI } from "../../../entities/shape";
-import cx from "classnames";
-import shapeStyles from "../Shape.module.css";
 import { ShapeItemProps } from "../Shape";
 
 type LineShapeProps = ShapeItemProps<LineShapeI>;
 
-export const LineShape = ({
-  shape,
-  strokeCN,
-  backgroundCN,
-  width,
-  height,
-}: LineShapeProps) => {
+export const LineShape = ({ shape, width, height }: LineShapeProps) => {
   return (
     <svg
       width={width + 20}
       height={height}
-      className={cx(shapeStyles[strokeCN], shapeStyles[backgroundCN])}
-      style={{ transform: `rotate(${shape.rotation}deg)` }}
+      stroke={shape.stroke}
+      style={{
+        transform: `rotate(${shape.rotation}deg)`,
+        background: shape.background,
+      }}
     >
       <line
         x1={10}

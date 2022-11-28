@@ -1,15 +1,10 @@
 import { RectangleShapeI } from "../../../entities/shape";
-import shapeStyles from "../Shape.module.css";
-import cx from "classnames";
 import { ShapeItemProps } from "../Shape";
 
 type RectangleShapeProps = ShapeItemProps<RectangleShapeI>;
 
 export const RectangleShape = ({
   shape,
-  fillCN,
-  strokeCN,
-  backgroundCN,
   width,
   height,
 }: RectangleShapeProps) => {
@@ -17,12 +12,12 @@ export const RectangleShape = ({
     <svg
       width={width + 20}
       height={height + 20}
-      className={cx(
-        shapeStyles[fillCN],
-        shapeStyles[strokeCN],
-        shapeStyles[backgroundCN]
-      )}
-      style={{ transform: `rotate(${shape.rotation}deg)` }}
+      fill={shape.fill}
+      stroke={shape.stroke}
+      style={{
+        transform: `rotate(${shape.rotation}deg)`,
+        background: shape.background,
+      }}
     >
       <rect
         x={10}
